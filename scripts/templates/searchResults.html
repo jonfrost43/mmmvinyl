@@ -1,0 +1,30 @@
+<ul>
+<% _.each(data[0].results, function(release) { %>
+	<li><a href="<%= release.uri %>"><%= release.title %></a></li>
+<% }); %>
+</ul>
+
+<% 
+	var parts = window.location.pathname.split("/"),
+		uri = "/" + parts[1] + "/" + parts[2] + "/";
+%>
+
+<p>
+	<% if(data[0].pagination.urls.first){ %>
+		<a href="<%= uri + "1" %>">first</a>
+	<% } %>
+
+	<% if(data[0].pagination.urls.prev){ %>
+		<a href="<%= uri + parseInt(data[0].pagination.page-1) %>">prev</a>
+	<% } %>
+
+	Page <%= data[0].pagination.page %> of <%= data[0].pagination.pages %>
+	
+	<% if(data[0].pagination.urls.next){ %>
+		<a href="<%= uri + parseInt(data[0].pagination.page+1) %>">next</a>
+	<% } %>
+	
+	<% if(data[0].pagination.urls.last){ %>
+		<a href="<%= uri + parseInt(data[0].pagination.pages) %>">last</a>
+	<% } %>
+</p>

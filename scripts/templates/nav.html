@@ -1,0 +1,10 @@
+<% if(username){ %>
+
+	<li><a href="/collection">My collection</a></li>
+	<li><a href="/signout">Sign out (<%= username %>)</a></li>
+	
+<% }else{ %>
+
+	<li><a href="/signin">Sign in (via Discogs.com)</a></li>
+	
+<% } %>

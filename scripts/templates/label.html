@@ -1,0 +1,6 @@
+<ul>
+<% _.each(releases, function(release) {
+	var release_uri = "/" + release.artist.replace(/[\/\s]/g, "-") + "-" + release.title.replace(/[\/\s]/g, "-") + "/release" + release.resource_url.split("releases")[1]; %>
+	<li><a href="<%= release_uri %>"><%= release.artist %> - <%= release.title %> - <%= release.format %></a></li>
+<% }); %>
+</ul>

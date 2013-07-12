@@ -1,0 +1,17 @@
+<h2>My collection</h2>
+<ul>
+<% _.each(releases, function(release) {
+	var release_uri = "/" + release.basic_information.title.replace(/[\/\s]/g, "-") + "/release/" + release.id; %>
+
+	<li>
+		<a href="<%= release_uri %>"><img src="<%= release.basic_information.thumb %>" /></a>
+		<h3>
+		<% _.each(release.basic_information.artists, function(artist) { %>
+			<a href="<%= release_uri %>"><%= artist.name %> <%= artist.join %></a>
+		<% }); %>
+		</h3>
+
+		<a href="<%= release_uri %>"><%= release.basic_information.title %></a>
+	</li>
+<% }); %>
+</ul>
