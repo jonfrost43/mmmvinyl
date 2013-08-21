@@ -1,9 +1,10 @@
 define([
 	'backbone',
+	'doT',
 	'app/collections/releases',
 	'text!templates/searchResults.html'
 ], 
-function(Backbone, ReleasesCollection, SearchResultsTemplate){
+function(Backbone, doT, ReleasesCollection, SearchResultsTemplate){
 	return Backbone.View.extend({
 		term: '',
 		page: '1',
@@ -36,9 +37,11 @@ function(Backbone, ReleasesCollection, SearchResultsTemplate){
 			});
 		},
 		render: function(){
-			console.log(this.collection.toJSON());
-			var compiledTemplate = _.template(SearchResultsTemplate, {data: this.collection.toJSON()});
-			this.$el.append(compiledTemplate);
+			console.log('search data: ', this.collection.toJSON());
+			var templateFnc = doT.template(SearchResultsTemplate),
+				html = templateFnc(this.collection.searchList());
+
+			this.$el.append(html);
 			$('#main').html(this.$el);
 			$('#loadingMsg').hide();
 		},

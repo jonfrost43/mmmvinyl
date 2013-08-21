@@ -1,9 +1,10 @@
 define([
 	'backbone',
+	'doT',
 	'app/collections/releases',
 	'text!templates/label.html',
 ], 
-function(Backbone, ReleasesCollection, LabelTemplate){
+function(Backbone, doT, ReleasesCollection, LabelTemplate){
 	return Backbone.View.extend({
 		labelId: '',
 		tagName: 'div',
@@ -29,9 +30,11 @@ function(Backbone, ReleasesCollection, LabelTemplate){
 			});
 		},
 		render: function(){
-			console.log(this.collection.vinylOnly());
-			var compiledTemplate = _.template(LabelTemplate, {releases: this.collection.vinylOnly()});
-			this.$el.append(compiledTemplate);
+			console.log(this.collection.labelList());
+			var templateFnc = doT.template(LabelTemplate)
+				html = templateFnc({releases: this.collection.labelList()});
+
+			this.$el.append(html);
 			$('#main').html(this.$el);
 			$('#loadingMsg').hide();
 		},

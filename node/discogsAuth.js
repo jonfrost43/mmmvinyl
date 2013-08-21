@@ -1,5 +1,5 @@
-var OAuth = require('oauth').OAuth,
-	database = require('./database');
+var OAuth = require('oauth').OAuth/*,
+	database = require('./database')*/;
 
 var oauthSession = {},
 	consumerKey = 'yXcHeGpsInupapEgdmBG',
@@ -52,11 +52,11 @@ exports.signinCallback = function(args){
 						oauthSession.username = data.username;
 						oauthSession.discogsId = data.id;
 						
-						database.addUser({
+/*						database.addUser({
 							username: data.username,
 							discogsId: data.id
 						});					
-					}
+*/					}
 				});
 				
 				args.success();

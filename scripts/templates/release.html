@@ -1,51 +1,31 @@
-<h2><%= title %></h2>
+<h2>{{=it.title}}</h2>
 
 <h3>by 
-<% _.each(artists, function(artist) { %>
-	<%= artist.name %> <%= artist.join %> 
-<% }); %>
+{{~it.artists :artist}}
+	{{=artist.name}} {{artist.join}}
+{{~}}
 </h3>
 
-<%
-var flipCssClass = '';
-if(images) {
-    flipCssClass = 'flipContainer';
-}
-else{
-	var images = [];
-}
-%>
-
-<div class="<%= flipCssClass %>">
+<div class="{{=it.imagesCssClass}}">
 	<div class="flipper">
-	<% _.find(images, function(image, key) { %>
-		<% if(key === 0){ %>
-			<div class="front">
-				<img src="<%= image.uri150 %>" alt="<%= title %>" width="150" height="150" />
-			</div>
-		<% } %>
-	<% }); %>
-	<% _.find(images, function(image, key) { %>
-		<% if(key === 1){ %>
-			<div class="back">
-				<img src="<%= image.uri150 %>" alt="<%= title %>" width="150" height="150" />
-			</div>
-		<% } %>
-	<% }); %>
+	{{~it.images :image}}
+		<div class="{{=image.cssClass}}">
+			<img src="{{=image.uri150}}" alt="{{=it.title}}" />
+		</div>
+	{{~}}
 	</div>
 </div>
 
 <p>
-<% _.each(labels, function(label) {
-	var label_uri = '/' + label.name.replace(/[\/\s]/g, "-") + label.resource_url.split("api.discogs.com")[1]; %>
-	<span><a class="labelLink" href="<%= label_uri %>">Find more releases on <%= label.name %></a></span>
-<% }); %>
+{{~it.labels :label}}
+	<span><a class="labelLink" href="{{=label.uri}}">Find more releases on {{=label.name}}</a></span>
+{{~}}
 </p>
 
 <ol>
-<% _.each(tracklist, function(track) { %>
-	<li><%= track.title %> <a href="#" class="addToPlaylist">Add to playlist</a></li>
-<% }); %>
+{{~it.tracklist :track}}
+	<li>{{=track.title}} <a href="#" class="addToPlaylist">Add to playlist</a></li>
+{{~}}
 </ol>
 
 <div id="trackOptionsDropdown">

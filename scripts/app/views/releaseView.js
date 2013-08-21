@@ -1,9 +1,10 @@
 define([
 	'backbone',
+	'doT',
 	'app/models/release',
 	'text!templates/release.html',
 ], 
-function(Backbone, ReleaseModel, ReleaseTemplate){
+function(Backbone, doT, ReleaseModel, ReleaseTemplate){
 	return Backbone.View.extend({
 		releaseId: '',
 		selectedTrackIndex: -1,
@@ -32,9 +33,11 @@ function(Backbone, ReleaseModel, ReleaseTemplate){
 			});
 		},
 		render: function(){
-			console.log(this.model.toJSON());
-			var compiledTemplate = _.template(ReleaseTemplate, this.model.toJSON());
-			this.$el.append(compiledTemplate);
+			console.log(this.model.releaseData());
+			var templateFnc = doT.template(ReleaseTemplate),
+				html = templateFnc(this.model.releaseData());
+
+			this.$el.append(html);
 			$('#main').html(this.$el);
 			$('#loadingMsg').hide();
 		},

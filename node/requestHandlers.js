@@ -1,6 +1,6 @@
 var fs = require('fs'),
 	path = require('path'),
-	database = require('./database'),
+	//database = require('./database'),
 	discogsAuth = require('./discogsAuth');
 
 exports.staticFile = function(pathname, response, postData){

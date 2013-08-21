@@ -1,8 +1,9 @@
 define([
 	'backbone',
+	'doT',
 	'text!templates/nav.html',
 ], 
-function(Backbone, NavTemplate){
+function(Backbone, doT, NavTemplate){
 	return Backbone.View.extend({
 		tagName: 'ul',
 		events: {
@@ -22,8 +23,10 @@ function(Backbone, NavTemplate){
 			});
 		},
 		render: function(userData){
-			var compiledTemplate = _.template(NavTemplate, userData);
-			this.$el.append(compiledTemplate);
+			var templateFnc = doT.template(NavTemplate),
+				html = templateFnc(userData);
+				
+			this.$el.append(html);
 			$('nav').html(this.$el);
 		}
 	});

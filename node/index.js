@@ -1,7 +1,7 @@
 var server = require('./server'),
 	router = require('./router'),
-	requestHandlers = require('./requestHandlers'),
-	database = require('./database');
+	requestHandlers = require('./requestHandlers')/*,
+	database = require('./database')*/;
 	
 var handlers = {
 	'/*': requestHandlers.staticFile,
@@ -13,4 +13,4 @@ var handlers = {
 };
 
 server.init(router.route, handlers);
-database.init();
+//database.init();
