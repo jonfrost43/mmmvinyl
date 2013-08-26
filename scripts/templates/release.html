@@ -16,22 +16,15 @@
 	</div>
 </div>
 
-<p>
-{{~it.labels :label}}
-	<span><a class="labelLink" href="{{=label.uri}}">Find more releases on {{=label.name}}</a></span>
-{{~}}
-</p>
-
 <ol>
 {{~it.tracklist :track}}
 	<li>{{=track.title}} <a href="#" class="addToPlaylist">Add to playlist</a></li>
 {{~}}
 </ol>
 
-<div id="trackOptionsDropdown">
-	<form id="createNewPlaylist">
-		<input type="text" />
-		<input type="submit" value="Create playlist" />
-	</form>
-</div>
+<p>
+{{~it.labels :label}}
+	<span><a class="labelLink" href="{{=label.uri}}">Find more releases on {{=label.name}}</a></span>
+{{~}}
+</p>
 

@@ -1,0 +1,9 @@
+<ul>
+{{~it.playlists :playlist}}
+<li><a href="/playlist/{{=playlist.name}}">{{=playlist.name}}</a></li>
+{{~}}
+</ul>
+<form id="createNewPlaylist">
+	<input type="text" />
+	<input type="submit" value="Create playlist" />
+</form>

@@ -19,6 +19,12 @@ define(['backbone', 'underscore'], function(Backbone, _){
 				}
 			});
 
+			json.images.length = 2;
+
+			json.tracklist = _.filter(json.tracklist, function(track){
+				return !!track.duration || !!track.position;
+			});
+
 			return json;
 		}
 

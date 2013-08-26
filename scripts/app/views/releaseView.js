@@ -3,8 +3,10 @@ define([
 	'doT',
 	'app/models/release',
 	'text!templates/release.html',
+	'app/collections/playlists',
+	'app/views/addToPlaylistView'
 ], 
-function(Backbone, doT, ReleaseModel, ReleaseTemplate){
+function(Backbone, doT, ReleaseModel, ReleaseTemplate, PlaylistsCollection, AddToPlaylistView){
 	return Backbone.View.extend({
 		releaseId: '',
 		selectedTrackIndex: -1,
@@ -40,6 +42,8 @@ function(Backbone, doT, ReleaseModel, ReleaseTemplate){
 			this.$el.append(html);
 			$('#main').html(this.$el);
 			$('#loadingMsg').hide();
+
+			this.addToPlaylistView = new AddToPlaylistView();			
 		},
 		flipSleeve: function(e){
 			this.$('.flipContainer').toggleClass('flipped');
@@ -54,7 +58,7 @@ function(Backbone, doT, ReleaseModel, ReleaseTemplate){
 			var pos = $(e.target).position(),
 				index = this.$('a.addToPlaylist').index(e.target);
 			
-			this.$('#trackOptionsDropdown').css({
+			this.addToPlaylistView.$el.css({
 				top: pos.top,
 				left: pos.left + $(e.target).width()
 			}).toggle(index !== this.selectedTrackIndex);
@@ -62,7 +66,22 @@ function(Backbone, doT, ReleaseModel, ReleaseTemplate){
 			this.selectedTrackIndex = this.selectedTrackIndex !== index ? index : -1;
 		},
 		createNewPlaylist: function(e){
-			e.preventDefault();		
+			e.preventDefault();
+			var playlistName = $(e.target).find('input[type=text]').val();
+			if(!!playlistName){
+				var playlists = new PlaylistsCollection();
+
+				playlists.create({
+					id: playlistName,
+					name: playlistName,
+					tracklist: [
+						{
+							artist: this.model.get('artists')[0].name,
+							title: this.model.get('tracklist')[this.selectedTrackIndex].title							
+						}
+					]
+				});
+			}
 		}
 	});
 });

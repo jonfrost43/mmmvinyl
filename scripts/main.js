@@ -3,6 +3,7 @@ requirejs.config({
 		jquery: 'lib/jquery',
 		underscore: 'lib/underscore',
 		backbone: 'lib/backbone',
+		localstorage: 'lib/backbone.localstorage',
 		doT: 'lib/doT'
     },
 	shim: {
