@@ -1,9 +1,12 @@
 define([
 	'backbone',
-	'app/collections/playlist',
+	'underscore',
+	'doT',
+	'app/models/playlist',
+	'app/collections/playlists',
 	'text!templates/playlist.html',
 ], 
-function(Backbone, PlaylistCollection, PlaylistTemplate){
+function(Backbone, _, doT, PlaylistModel, PlaylistsCollection, PlaylistTemplate){
 	return Backbone.View.extend({
 		playlistId: '',
 		tagName: 'div',
@@ -14,22 +17,24 @@ function(Backbone, PlaylistCollection, PlaylistTemplate){
 		},
 		initialize: function(){
 			console.log('playlist view init');
+			this.collection = new PlaylistsCollection();
 			this.getPlaylist(this.options.playlistId);
 		},
 		getPlaylist: function(playlistId){
-			$.ajax({
-				url: '/api/playlist/' + playlistId,
-				dataType: 'json',
+			this.collection.fetch({
 				success: _.bind(function(response){
-					this.model = new PlaylistCollection(response.data);
+					this.model = response.get(playlistId);
 					this.render();
 				}, this)
 			});
 		},
 		render: function(){
-			console.log(this.collection.toJSON());
-			var compiledTemplate = _.template(PlaylistTemplate, this.collection.toJSON());
-			this.$el.append(compiledTemplate);
+			console.log(this.model.toJSON());
+
+			var templateFnc = doT.template(PlaylistTemplate),
+				html = templateFnc(this.model.toJSON());
+
+			this.$el.append(html);
 			$('#main').html(this.$el);
 			$('#loadingMsg').hide();
 		}

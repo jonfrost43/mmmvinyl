@@ -19,13 +19,41 @@ define(['backbone', 'underscore'], function(Backbone, _){
 				}
 			});
 
-			json.images.length = 2;
+			if(json.images.length > 2){
+				json.images.length = 2;				
+			}
 
 			json.tracklist = _.filter(json.tracklist, function(track){
 				return !!track.duration || !!track.position;
 			});
 
 			return json;
+		},
+
+		getTrackName: function(index){
+			var tracklist = _.filter(this.toJSON().tracklist, function(track){
+				return !!track.duration || !!track.position;
+			});
+
+			return tracklist[index].title;
+		},
+
+		getArtistName: function(){
+			var artists = this.toJSON().artists;
+
+			if(artists.length === 1){
+				return artists[0].name;
+			}
+			else{
+				var artistName = '';
+				_.each(artists, function(artist){
+					artistName += artist.name;
+					if(!!artist.join){
+						artistName += ' ' + artist.join + ' ';
+					}
+				});
+				return artistName;
+			}
 		}
 
 	});

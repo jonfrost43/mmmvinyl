@@ -1,0 +1,6 @@
+<h2>{{=it.name}}</h2>
+<ol>
+{{~it.tracklist :track}}
+	<li>{{=track.artist}} - {{=track.title}}</li>
+{{~}}
+</ol>

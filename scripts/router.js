@@ -3,9 +3,10 @@ define([
 	'app/views/searchResultsView',
 	'app/views/releaseView',
 	'app/views/labelView',
+	'app/views/playlistView',
 	'app/views/collectionView'
 ], 
-function(Backbone, SearchResultsView, ReleaseView, LabelView, CollectionView){
+function(Backbone, SearchResultsView, ReleaseView, LabelView, PlaylistView, CollectionView){
 	return Backbone.Router.extend({
 		routes: {
 			':title/release/:id': 'release',
