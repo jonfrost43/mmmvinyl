@@ -11,7 +11,10 @@ function(Backbone, _, doT, PlaylistsCollection, addToPlaylistTemplate){
 		attributes: {
 			id: 'trackOptionsDropdown'
 		},
+		track: null,
 		events: {
+			'submit #createNewPlaylist': 'createNewPlaylist',
+			'click a.playlist': 'addToPlaylist'
 		},
 		initialize: function(){
 			this.collection = new PlaylistsCollection();
@@ -27,6 +30,31 @@ function(Backbone, _, doT, PlaylistsCollection, addToPlaylistTemplate){
 
 			this.$el.append(html);
 			$('#release').append(this.$el);
+		},
+		createNewPlaylist: function(e){
+			e.preventDefault();
+			var playlistName = $(e.target).find('input[type=text]').val();
+			if(!!playlistName && !!this.track){
+				this.collection.create({
+					id: playlistName,
+					name: playlistName,
+					tracklist: [this.track]
+				});
+			}
+		},
+		addToPlaylist: function(e){
+			e.preventDefault();
+
+			var playlist = this.collection.get(e.target.innerHTML),
+				tracklist = playlist.get('tracklist');
+
+			tracklist.push(this.track);
+
+			playlist.save({
+				'tracklist': tracklist
+			});
+			
+			Backbone.history.navigate(e.target.pathname, {trigger: true});
 		}
 	});
 });

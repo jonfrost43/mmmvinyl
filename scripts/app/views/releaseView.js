@@ -17,9 +17,7 @@ function(Backbone, doT, ReleaseModel, ReleaseTemplate, PlaylistsCollection, AddT
 		events: {
 			'click a.labelLink': 'goToLabel',
 			'click a.addToPlaylist': 'togglePlaylistsDropdown',
-			'submit #createNewPlaylist': 'createNewPlaylist',
-			'touchend div.flipContainer': 'flipSleeve',
-			'click a.playlist': 'addToPlaylist'
+			'touchend div.flipContainer': 'flipSleeve'
 		},
 		initialize: function(){
 			console.log('release view init');
@@ -65,28 +63,13 @@ function(Backbone, doT, ReleaseModel, ReleaseTemplate, PlaylistsCollection, AddT
 			}).toggle(index !== this.selectedTrackIndex);
 			
 			this.selectedTrackIndex = this.selectedTrackIndex !== index ? index : -1;
-		},
-		createNewPlaylist: function(e){
-			e.preventDefault();
-			var playlistName = $(e.target).find('input[type=text]').val();
-			if(!!playlistName){
-				var playlists = new PlaylistsCollection();
 
-				playlists.create({
-					id: playlistName,
-					name: playlistName,
-					tracklist: [
-						{
-							artist: this.model.getArtistName(),
-							title: this.model.getTrackName(this.selectedTrackIndex)							
-						}
-					]
-				});
+			if(this.selectedTrackIndex !== -1){
+				this.addToPlaylistView.track = {
+					artist: this.model.getArtistName(),
+					title: this.model.getTrackName(this.selectedTrackIndex)
+				}
 			}
-		},
-		addToPlaylist: function(e){
-			var playlistName = e.target.innerHTML;
-			console.log(playlistName);
 		}
 	});
 });
