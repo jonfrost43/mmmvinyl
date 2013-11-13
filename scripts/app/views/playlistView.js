@@ -15,6 +15,7 @@ function($, Backbone, _, doT, PlaylistModel, PlaylistsCollection, PlaylistTempla
 			id: 'playlist'
 		},
 		events: {
+			'click button.remove': 'removeTrack',
 			'click button.moveUp': 'moveTrackUp',
 			'click button.moveDown': 'moveTrackDown'
 		},
@@ -44,7 +45,7 @@ function($, Backbone, _, doT, PlaylistModel, PlaylistsCollection, PlaylistTempla
 		},
 		moveTrackUp: function(e){
 			var newTracklist = this.model.get('tracklist'),
-				trackIndex = $(e.target).parent().index();
+				trackIndex = $(e.target).parent().index(),
 				track = newTracklist.splice(trackIndex, 1)[0];
 
 			newTracklist.splice(trackIndex-1, 0, track);
@@ -57,10 +58,22 @@ function($, Backbone, _, doT, PlaylistModel, PlaylistsCollection, PlaylistTempla
 		},
 		moveTrackDown: function(e){
 			var newTracklist = this.model.get('tracklist'),
-				trackIndex = $(e.target).parent().index();
+				trackIndex = $(e.target).parent().index(),
 				track = newTracklist.splice(trackIndex, 1)[0];
 
 			newTracklist.splice(trackIndex+1, 0, track);
+
+			this.model.save({
+				tracklist: newTracklist
+			}, {
+				success: _.bind(this.render, this)
+			});
+		},
+		removeTrack: function(e){
+			var newTracklist = this.model.get('tracklist'),
+				trackIndex = $(e.target).parent().index();
+
+			newTracklist.splice(trackIndex, 1);
 
 			this.model.save({
 				tracklist: newTracklist
