@@ -1,6 +1,16 @@
 <h2>{{=it.name}}</h2>
 <ol>
-{{~it.tracklist :track}}
-	<li>{{=track.artist}} - {{=track.title}}</li>
+{{~it.tracklist :track :index}}
+	<li>
+		{{=track.artist}} - {{=track.title}} 
+
+		{{ if(index>0){ }}
+			<button type="button" class="moveUp">move up</button>
+		{{ } }}
+
+		{{ if(index<it.tracklist.length-1){ }}
+			<button type="button" class="moveDown">move down</button>
+		{{ } }}
+	</li>
 {{~}}
 </ol>
