@@ -39,6 +39,10 @@ function(Backbone, _, doT, PlaylistsCollection, addToPlaylistTemplate){
 					id: playlistName,
 					name: playlistName,
 					tracklist: [this.track]
+				}, {
+					success: function(){
+						Backbone.history.navigate('/playlist/'+playlistName, {trigger: true});						
+					}
 				});
 			}
 		},
