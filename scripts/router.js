@@ -14,10 +14,12 @@ function(Backbone, SearchResultsView, ReleaseView, LabelView, PlaylistView, Coll
 			'search/:term/:page': 'search',
 			'playlist/:id': 'playlist',
 			'collection': 'collection',
+			'signup': 'signup',
 			'*actions': 'defaultRoute'
 		},
 		defaultRoute: function(){
 			console.log('default route');
+			$('#main').empty();
 		},
 		release: function(title, id){
 			console.log('release route', id);
@@ -52,6 +54,13 @@ function(Backbone, SearchResultsView, ReleaseView, LabelView, PlaylistView, Coll
 			console.log('collection route');
 			$('#loadingMsg').show();
 			new CollectionView();
+		},
+		signup: function(){
+			console.log('signup route');
+			$('#loadingMsg').show();
+			require(['app/views/signUpView'], function(SignUpView){
+				new SignUpView();				
+			});
 		}
 	});
 });

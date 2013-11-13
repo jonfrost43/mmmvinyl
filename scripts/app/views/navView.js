@@ -7,6 +7,7 @@ function(Backbone, doT, NavTemplate){
 	return Backbone.View.extend({
 		tagName: 'ul',
 		events: {
+			'click a.internal': 'goToLink'			
 		},
 		initialize: function(){
 			console.log('app view init');
@@ -28,6 +29,10 @@ function(Backbone, doT, NavTemplate){
 				
 			this.$el.append(html);
 			$('nav').html(this.$el);
+		},
+		goToLink: function(e){
+			e.preventDefault();
+			Backbone.history.navigate(e.target.pathname, {trigger: true});
 		}
 	});
 });

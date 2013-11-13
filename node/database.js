@@ -1,4 +1,11 @@
-var mongoose = require('mongoose'),
+var MongoClient = require('mongodb').MongoClient,
+	MongoServer = require('mongodb').Server;
+
+exports.signup = function(args){
+	console.log(args);
+};
+
+/*var mongoose = require('mongoose'),
 	db,
 	userSchema,
 	User;
@@ -45,3 +52,4 @@ var addUser = function(opts){
 
 exports.init = init;
 exports.addUser = addUser;
+*/

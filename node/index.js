@@ -7,6 +7,7 @@ var handlers = {
 	'/*': requestHandlers.staticFile,
 	'/api/identity': requestHandlers.identity,
 	'/api/collection': requestHandlers.collection,
+	'/api/signup': requestHandlers.signup,
 	'/signin': requestHandlers.signin,
 	'/signout': requestHandlers.signout,
 	'/oauth/callback': requestHandlers.oauthCallback
