@@ -1,14 +1,15 @@
 {
-	"name": "mmm...vinyl",
-	"version": "0.1.0",
-	"dependencies": {
-		"mongodb": "1.3.x",
-		"oauth": "0.9.x"
-	},
-	"devDependencies": {
-		"grunt": "~0.4.1",
-		"grunt-contrib-jshint": "~0.6.0",
-		"grunt-contrib-nodeunit": "~0.2.0",
-		"grunt-contrib-uglify": "~0.2.2"
-	}
+  "name": "mmm...vinyl",
+  "version": "0.1.0",
+  "dependencies": {
+    "mongodb": "1.3.x",
+    "oauth": "0.9.x"
+  },
+  "devDependencies": {
+    "grunt": "~0.4.1",
+    "grunt-contrib-jshint": "~0.6.0",
+    "grunt-contrib-nodeunit": "~0.2.0",
+    "grunt-contrib-uglify": "~0.2.2",
+    "grunt-plato": "~0.2.1"
+  }
 }
