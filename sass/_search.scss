@@ -1,14 +1,20 @@
-#searchResults ul {
-	list-style-type: none;
-    padding: 0;
+#searchResults, .tracklist {
+	ul {
+		list-style-type: none;
+	    padding: 0;
+	}
+
+	ol {
+	    padding: 0;
+	}
 
     li {
     	background: #eee;
         border-bottom: 1px solid #ddd;
         border-top: 1px solid #fff;
+        padding: 10px;
 
         a {
-            padding: 10px;
             display: block;
 
             img {

@@ -20,7 +20,7 @@ function(Backbone, doT, discogs, ReleaseModel, ReleaseTemplate, PlaylistsCollect
 
 		events: {
 			'click a.labelLink': 'goToLabel',
-			'click a.addToPlaylist': 'togglePlaylistsDropdown',
+			'click button.addToPlaylist': 'togglePlaylistsDropdown',
 			'touchend div.flipContainer': 'flipSleeve'
 		},
 
@@ -67,13 +67,12 @@ function(Backbone, doT, discogs, ReleaseModel, ReleaseTemplate, PlaylistsCollect
 		togglePlaylistsDropdown: function(e){
 			e.preventDefault();
 
-			var pos = $(e.target).position(),
-				index = this.$('a.addToPlaylist').index(e.target);
+			var $parent = $(e.target).parent(),
+				index = this.$('button.addToPlaylist').index(e.target);
 
-			this.addToPlaylistView.$el.css({
-				top: pos.top,
-				left: pos.left + $(e.target).width()
-			}).toggle(index !== this.selectedTrackIndex);
+			this.addToPlaylistView.$el
+				.appendTo($parent)
+				.toggle(index !== this.selectedTrackIndex);
 
 			this.selectedTrackIndex = this.selectedTrackIndex !== index ? index : -1;
 

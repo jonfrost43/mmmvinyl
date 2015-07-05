@@ -18,11 +18,13 @@
 	</div>
 {{?}}
 
-<ol>
-{{~it.tracklist :track}}
-	<li>{{=track.title}} <a href="#" class="addToPlaylist">Add to playlist</a></li>
-{{~}}
-</ol>
+<div class="tracklist">
+	<ol>
+	{{~it.tracklist :track}}
+		<li><strong>{{=track.position}}</strong> {{=track.title}} <button type="button" class="addToPlaylist">Add to playlist</button></li>
+	{{~}}
+	</ol>
+</div>
 
 <p>
 {{~it.labels :label}}
