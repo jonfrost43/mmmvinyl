@@ -1,12 +1,8 @@
 <h2>{{=it.title}}</h2>
 
-<h3>by 
-{{~it.artists :artist}}
-	{{=artist.name}} {{=artist.join}} 
-{{~}}
-</h3>
+<h3>by {{=it.artistName}}</h3>
 
-<div class="{{=it.imagesCssClass}}">
+<!--<div class="{{=it.imagesCssClass}}">
 	<div class="flipper">
 	{{~it.images :image}}
 		<div class="{{=image.cssClass}}">
@@ -14,7 +10,13 @@
 		</div>
 	{{~}}
 	</div>
-</div>
+</div>-->
+
+{{?it.images.length}}
+	<div class="image">
+		<img src="{{=it.images[0].uri}}" alt="{{=it.title}}" />
+	</div>
+{{?}}
 
 <ol>
 {{~it.tracklist :track}}
@@ -27,4 +29,3 @@
 	<span><a class="labelLink" href="{{=label.uri}}">Find more releases on {{=label.name}}</a></span>
 {{~}}
 </p>
-

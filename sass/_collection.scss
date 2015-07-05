@@ -1,0 +1,12 @@
+#collection ul {
+	list-style-type: none;
+	overflow: hidden;
+
+    li {
+    	float: left;
+    	width: 150px;
+    	padding: 10px;
+    	background: #eee;
+    	min-height: 300px;
+    }
+}
