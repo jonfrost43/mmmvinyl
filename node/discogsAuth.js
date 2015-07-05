@@ -10,7 +10,7 @@ var oauthSession = {},
 		baseUrl + '/oauth/access_token',
 		consumerKey,
 		consumerSecret,
-		'1.0A',
+		'1.0',
 		'http://localhost:8125/oauth/callback',
 		'HMAC-SHA1'
 	);
