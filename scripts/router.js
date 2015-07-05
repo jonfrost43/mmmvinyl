@@ -1,16 +1,16 @@
 define([
-	'backbone', 
+	'backbone',
 	'app/views/searchResultsView',
 	'app/views/releaseView',
 	'app/views/labelView',
 	'app/views/playlistView',
 	'app/views/collectionView'
-], 
+],
 function(Backbone, SearchResultsView, ReleaseView, LabelView, PlaylistView, CollectionView){
 	return Backbone.Router.extend({
 		routes: {
 			':title/release/:id': 'release',
-			':name/labels/:id': 'label',
+			':name/labels/:id(/:page)': 'label',
 			'search/:term/:page': 'search',
 			'playlist/:id': 'playlist',
 			'collection': 'collection',
@@ -28,11 +28,12 @@ function(Backbone, SearchResultsView, ReleaseView, LabelView, PlaylistView, Coll
 				releaseId: id
 			});
 		},
-		label: function(name, id){
+		label: function(name, id, page){
 			console.log('label route', id);
 			$('#loadingMsg').show();
 			new LabelView({
-				labelId: id
+				labelId: id,
+				page: page
 			});
 		},
 		search: function(term, page){
@@ -59,7 +60,7 @@ function(Backbone, SearchResultsView, ReleaseView, LabelView, PlaylistView, Coll
 			console.log('signup route');
 			$('#loadingMsg').show();
 			require(['app/views/signUpView'], function(SignUpView){
-				new SignUpView();				
+				new SignUpView();
 			});
 		}
 	});
