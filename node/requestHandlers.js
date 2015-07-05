@@ -8,10 +8,10 @@ exports.staticFile = function(pathname, response, postData){
 	if(filePath === '../'){
 		filePath = '../index.html';
 	}
-	
+
 	var extName = path.extname(filePath),
 		contentType = 'text/html';
-		
+
 	switch(extName){
 		case '.css':
 			contentType = 'text/css';
@@ -20,14 +20,14 @@ exports.staticFile = function(pathname, response, postData){
 			contentType = 'text/javascript';
 			break;
 	}
-	
+
 	fs.exists(filePath, function(exists){
 		if(!exists){
 			filePath = '../index.html';
 		}
-		
+
 		console.log('Request handler "staticFile" was called for ' + filePath);
-		
+
 		fs.readFile(filePath, function(error, content){
 			if(error){
 				console.log(filePath, error);
@@ -44,18 +44,18 @@ exports.staticFile = function(pathname, response, postData){
 
 exports.signin = function(pathname, response, postData){
 	console.log('Request handler "signin" was called.');
-	
+
 	discogsAuth.signin({
 		success: function(oauthToken){
 			console.log('Success on getOAuthRequestToken');
-			
+
 			response.writeHead(302, {'Location': 'http://www.discogs.com/oauth/authorize?oauth_token='+oauthToken});
 			response.end();
 		},
 		error: function(){
 			console.log('An error happened on getOAuthRequestToken:');
 			console.log(error);
-			
+
 			response.writeHead(200, {'Content-Type': 'text/plain'});
 			response.end('There was an error trying to request a token on Discogs.com');
 		}
@@ -97,7 +97,7 @@ exports.signup = function(pathname, response, postData, querystring){
 exports.oauthCallback = function(pathname, response, postData, querystring){
 	console.log('Request handler "oauthCallback" was called.');
 	console.log(querystring);
-	
+
 	discogsAuth.signinCallback({
 		oauthVerifier: querystring.oauth_verifier,
 		success: function(){
@@ -116,12 +116,12 @@ exports.oauthCallback = function(pathname, response, postData, querystring){
 exports.identity = function(pathname, response, postData, querystring){
 	console.log('Request handler "identity" was called.');
 	console.log(discogsAuth.session);
-	
+
 	discogsAuth.getIdentity({
-		oauthAccessToken: discogsAuth.session.accessToken, 
+		oauthAccessToken: discogsAuth.session.accessToken,
 		oauthAccessTokenSecret: discogsAuth.session.accessTokenSecret,
 		error: function(error){
-			response.writeHead(error.statusCode, {'Content-Type': 'application/json'});
+			response.writeHead(error.statusCode || 500, {'Content-Type': 'application/json'});
 			response.end(error.data);
 		},
 		success: function(data){
@@ -129,16 +129,16 @@ exports.identity = function(pathname, response, postData, querystring){
 			response.end(data);
 		}
 	});
-	
+
 }
 
 exports.collection = function(pathname, response, postData, querystring){
 	console.log('Request handler "collection" was called.');
 	console.log(discogsAuth.session);
-	
+
 	discogsAuth.getCollection({
 		username: discogsAuth.session.username,
-		oauthAccessToken: discogsAuth.session.accessToken, 
+		oauthAccessToken: discogsAuth.session.accessToken,
 		oauthAccessTokenSecret: discogsAuth.session.accessTokenSecret,
 		error: function(error){
 			response.writeHead(error.statusCode, {'Content-Type': 'application/json'});
@@ -149,5 +149,5 @@ exports.collection = function(pathname, response, postData, querystring){
 			response.end(data);
 		}
 	});
-	
+
 }

@@ -2,14 +2,15 @@ var OAuth = require('oauth').OAuth/*,
 	database = require('./database')*/;
 
 var oauthSession = {},
+	baseUrl = 'https://api.discogs.com',
 	consumerKey = 'yXcHeGpsInupapEgdmBG',
 	consumerSecret = 'lKEQkcWxJpnfvUrivvYdrzExZfzNReZQ',
 	oa = new OAuth(
-		'http://api.discogs.com/oauth/request_token',
-		'http://api.discogs.com/oauth/access_token',
+		baseUrl + '/oauth/request_token',
+		baseUrl + '/oauth/access_token',
 		consumerKey,
 		consumerSecret,
-		'1.0',
+		'1.0A',
 		'http://localhost:8125/oauth/callback',
 		'HMAC-SHA1'
 	);
@@ -22,7 +23,7 @@ exports.signin = function(args){
 		else{
 			oauthSession.token = oauthToken;
 			oauthSession.tokenSecret = oauthTokenSecret;
-			
+
 			args.success(oauthToken);
 		}
 	});
@@ -33,7 +34,7 @@ exports.signout = function(args){
 }
 
 exports.signinCallback = function(args){
-	oa.getOAuthAccessToken(oauthSession.token, oauthSession.tokenSecret, args.oauthVerifier, 
+	oa.getOAuthAccessToken(oauthSession.token, oauthSession.tokenSecret, args.oauthVerifier,
 		function(error, oauthAccessToken, oauthAccessTokenSecret, results){
 			if(error){
 				oauthSession = {};
@@ -42,23 +43,23 @@ exports.signinCallback = function(args){
 			else{
 				oauthSession.accessToken = oauthAccessToken;
 				oauthSession.accessTokenSecret = oauthAccessTokenSecret;
-				
+
 				getIdentity({
 					oauthAccessToken: oauthAccessToken,
 					oauthAccessTokenSecret: oauthAccessTokenSecret,
 					success: function(data){
 						data = JSON.parse(data);
-						
+
 						oauthSession.username = data.username;
 						oauthSession.discogsId = data.id;
-						
+
 /*						database.addUser({
 							username: data.username,
 							discogsId: data.id
-						});					
+						});
 */					}
 				});
-				
+
 				args.success();
 			}
 		}
@@ -66,9 +67,11 @@ exports.signinCallback = function(args){
 }
 
 function getIdentity(args){
-	oa.get('http://api.discogs.com/oauth/identity', args.oauthAccessToken, args.oauthAccessTokenSecret, function(error, data, response){
+	console.log(args);
+	oa.get(baseUrl + '/oauth/identity', args.oauthAccessToken, args.oauthAccessTokenSecret, function(error, data, response){
 		if(error){
 			if(typeof args.error === 'function'){
+				console.log(error);
 				args.error(error);
 			}
 		}
@@ -80,7 +83,7 @@ function getIdentity(args){
 	});
 }
 function getCollection(args){
-	oa.get('http://api.discogs.com/users/'+args.username+'/collection/folders/0/releases', args.oauthAccessToken, args.oauthAccessTokenSecret, function(error, data, response){
+	oa.get(baseUrl + '/users/' + args.username + '/collection/folders/0/releases', args.oauthAccessToken, args.oauthAccessTokenSecret, function(error, data, response){
 		if(error){
 			if(typeof args.error === 'function'){
 				args.error(error);
