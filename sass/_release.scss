@@ -10,6 +10,7 @@ div.image {
     padding: 0 10px;
     img {
         width: 100%;
+		max-width: 350px;
     }
 }
 
@@ -73,4 +74,21 @@ div.image {
     	-o-transform: rotateY(180deg);
     	transform: rotateY(180deg);
     }
+}
+
+@media (min-width: 600px) {
+	div.image {
+		float: left;
+		width: 30%;
+		padding: 0;
+
+		img {
+			float: right;
+		}
+	}
+
+	div.text {
+		float: right;
+		width: 70%;
+	}
 }

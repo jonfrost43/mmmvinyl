@@ -1,7 +1,3 @@
-<h2>{{=it.title}}</h2>
-
-<h3>by {{=it.artistName}}</h3>
-
 <!--<div class="{{=it.imagesCssClass}}">
 	<div class="flipper">
 	{{~it.images :image}}
@@ -18,16 +14,22 @@
 	</div>
 {{?}}
 
-<div class="tracklist">
-	<ol>
-	{{~it.tracklist :track}}
-		<li><strong>{{=track.position}}</strong> {{=track.title}} <button type="button" class="addToPlaylist">Add to playlist</button></li>
-	{{~}}
-	</ol>
-</div>
+<div class="text">
+	<h2>{{=it.title}}</h2>
 
-<p>
-{{~it.labels :label}}
-	<span><a class="labelLink" href="{{=label.uri}}">Find more releases on {{=label.name}}</a></span>
-{{~}}
-</p>
+	<h3>by {{=it.artistName}}</h3>
+
+	<div class="tracklist">
+		<ol>
+		{{~it.tracklist :track}}
+			<li><strong>{{=track.position}}</strong> {{=track.title}} <button type="button" class="addToPlaylist">Add to playlist</button></li>
+		{{~}}
+		</ol>
+	</div>
+
+	<p>
+	{{~it.labels :label}}
+		<span><a class="labelLink" href="{{=label.uri}}">Find more releases on {{=label.name}}</a></span>
+	{{~}}
+	</p>	
+</div>
