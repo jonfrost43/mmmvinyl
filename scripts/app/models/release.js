@@ -19,10 +19,6 @@ define(['backbone', 'underscore'], function(Backbone, _){
 				}
 			});
 
-			if(json.images.length > 2){
-				json.images.length = 2;
-			}
-
 			json.artistName = this.getArtistName();
 
 			json.tracklist = _.filter(json.tracklist, function(track){
