@@ -5,13 +5,14 @@ var oauthSession = {},
 	baseUrl = 'https://api.discogs.com',
 	consumerKey = 'yXcHeGpsInupapEgdmBG',
 	consumerSecret = 'lKEQkcWxJpnfvUrivvYdrzExZfzNReZQ',
+	port = process.env.port || 3000;
 	oa = new OAuth(
 		baseUrl + '/oauth/request_token',
 		baseUrl + '/oauth/access_token',
 		consumerKey,
 		consumerSecret,
 		'1.0',
-		'http://localhost:8125/oauth/callback',
+		'http://localhost:' + port + '/oauth/callback',
 		'HMAC-SHA1'
 	);
 

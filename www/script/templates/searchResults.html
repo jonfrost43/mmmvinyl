@@ -1,0 +1,30 @@
+<ul>
+{{~it.data[0].results :release}}
+	<li>
+		<a href="{{=release.uri}}">
+			{{?release.thumb}}<img src="{{=release.thumb}}" width="50" height="50" />{{?}}
+			{{=release.title}} [{{=release.catno}}]
+		</a>
+	</li>
+{{~}}
+</ul>
+
+<p>
+	{{?it.data[0].pagination.urls.first}}
+		<a href="{{=it.path + "1" }}">first</a>
+	{{?}}
+
+	{{?it.data[0].pagination.urls.prev}}
+		<a href="{{=it.path + parseInt(it.data[0].pagination.page-1) }}">prev</a>
+	{{?}}
+
+	Page {{= it.data[0].pagination.page }} of {{= it.data[0].pagination.pages }}
+
+	{{?it.data[0].pagination.urls.next}}
+		<a href="{{=it.path + parseInt(it.data[0].pagination.page+1) }}">next</a>
+	{{?}}
+
+	{{?it.data[0].pagination.urls.last}}
+		<a href="{{=it.path + parseInt(it.data[0].pagination.pages) }}">last</a>
+	{{?}}
+</p>
