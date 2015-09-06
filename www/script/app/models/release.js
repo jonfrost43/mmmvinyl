@@ -32,6 +32,14 @@ define(['backbone', 'underscore'], function(Backbone, _){
 			return json;
 		},
 
+		getTrack: function(index){
+			var tracklist = _.filter(this.toJSON().tracklist, function(track){
+				return !!track.duration || !!track.position;
+			});
+
+			return tracklist[index];
+		},
+
 		getTrackName: function(index){
 			var tracklist = _.filter(this.toJSON().tracklist, function(track){
 				return !!track.duration || !!track.position;

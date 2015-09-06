@@ -68,7 +68,8 @@ function(Backbone, doT, discogs, ReleaseModel, ReleaseTemplate, PlaylistsCollect
 			e.preventDefault();
 
 			var $parent = $(e.target).parent(),
-				index = this.$('button.addToPlaylist').index(e.target);
+				index = this.$('button.addToPlaylist').index(e.target),
+				track;
 
 			this.addToPlaylistView.$el
 				.appendTo($parent)
@@ -77,8 +78,10 @@ function(Backbone, doT, discogs, ReleaseModel, ReleaseTemplate, PlaylistsCollect
 			this.selectedTrackIndex = this.selectedTrackIndex !== index ? index : -1;
 
 			if(this.selectedTrackIndex !== -1){
+				track = this.model.getTrack(this.selectedTrackIndex);
+
 				this.addToPlaylistView.track = {
-					artist: this.model.getArtistName(),
+					artist: this.model.getArtistName(track.artists),
 					title: this.model.getTrackName(this.selectedTrackIndex)
 				}
 			}
