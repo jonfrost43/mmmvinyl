@@ -22,8 +22,12 @@ define(['backbone', 'underscore'], function(Backbone, _){
 			json.artistName = this.getArtistName();
 
 			json.tracklist = _.filter(json.tracklist, function(track){
+				if(track.artists){
+					track.artistName = this.getArtistName(track.artists)
+				}
+
 				return !!track.duration || !!track.position;
-			});
+			}, this);
 
 			return json;
 		},
@@ -36,8 +40,8 @@ define(['backbone', 'underscore'], function(Backbone, _){
 			return tracklist[index].title;
 		},
 
-		getArtistName: function(){
-			var artists = this.toJSON().artists;
+		getArtistName: function(artists){
+			var artists = artists || this.toJSON().artists;
 
 			if(artists.length === 1){
 				return artists[0].name;

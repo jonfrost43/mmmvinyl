@@ -22,7 +22,7 @@
 	<div class="tracklist">
 		<ol>
 		{{~it.tracklist :track}}
-			<li><strong>{{=track.position}}</strong> {{=track.title}} <button type="button" class="addToPlaylist">Add to playlist</button></li>
+			<li><strong>{{=track.position}}</strong> {{?track.artistName}}{{=track.artistName}} &ndash;{{?}} {{=track.title}} <button type="button" class="addToPlaylist">Add to playlist</button></li>
 		{{~}}
 		</ol>
 	</div>
@@ -31,5 +31,5 @@
 	{{~it.labels :label}}
 		<span><a class="labelLink" href="{{=label.uri}}">Find more releases on {{=label.name}}</a></span>
 	{{~}}
-	</p>	
+	</p>
 </div>
