@@ -1,0 +1,45 @@
+body {
+    font-size: 62.5%;
+    font-family: Georgia, Times, Times New Roman, serif;
+}
+
+.wrapper {
+    width: 100%;
+    text-align: center;
+}
+
+.inner {
+    width: 960px;
+    margin: 0 auto;
+    text-align: left;
+}
+
+.column { padding: 0 10px; float: left; }
+.one 	{ width: 60px; }
+.two 	{ width: 140px; }
+.three 	{ width: 220px; }
+.four 	{ width: 300px; }
+.five 	{ width: 380px; }
+.six 	{ width: 460px; }
+.seven 	{ width: 540px; }
+.eight 	{ width: 620px; }
+.nine 	{ width: 700px; }
+.ten 	{ width: 780px; }
+.eleven { width: 860px; }
+.twelve { width: 940px; }
+
+.box {
+    border: 1px solid #ccc;
+    margin-bottom: 20px;
+    padding: 15px 15px 5px 15px;
+    -moz-border-radius: 6px;
+    -webkit-border-radius: 6px;
+
+    .boxTitle {
+        margin-top: -25px;
+
+        span {
+            background: #fff; padding: 0 5px;
+        }
+    }
+}

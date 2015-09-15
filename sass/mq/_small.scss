@@ -1,0 +1,23 @@
+@media only screen and (max-width: 480px), only screen and (max-device-width: 480px) {
+
+    .inner {
+        width: auto;
+    }
+
+    .column, .format, .label, .tracklist {
+        width: auto; float: none;
+    }
+
+    .artwork {
+        float: right; padding: 0 0 0 20px;
+    }
+
+    #logo, nav {
+        text-align: center;
+    }
+
+    nav li {
+        margin-left: 10px; margin-right: 10px;
+    }
+
+}

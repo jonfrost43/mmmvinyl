@@ -9,15 +9,35 @@
 </head>
 <body>
 	<div id="app">
-		<h1>&ldquo;mmm...vinyl&rdquo;</h1>
-		<nav></nav>
-		<div id="searchBar">
-			<form id="search">
-				<input type="text" id="searchBox" />
-				<input type="submit" id="searchBtn" value="Search" />
-			</form>
+		<div class="wrapper header">
+			<div class="inner">
+				<div class="column five" id="logo">
+					<a href="/">&ldquo;mmm...vinyl&rdquo;</a>
+				</div>
+				<div class="column seven">
+					<nav></nav>
+				</div>
+			</div>
 		</div>
-		<div id="main">
+		<div class="wrapper main">
+			<div class="inner">
+				<div id="searchBar" class="column four sidebar">
+					<div class="box">
+						<h3 class="boxTitle">
+							<span>Search</span>
+						</h3>
+						<form id="search">
+							<p>
+								<input type="text" id="searchBox" />
+								<input type="submit" id="searchBtn" />
+							</p>
+						</form>
+					</div>
+				</div>
+				<div id="main" class="column eight content">
+					<h1>Welcome</h1>
+				</div>
+			</div>
 		</div>
 		<div id="loadingMsg">loading...</div>
 	</div>

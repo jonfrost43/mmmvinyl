@@ -1,0 +1,29 @@
+.header {
+    background: #eee;
+    overflow: hidden;
+    padding: 10px 0;
+    margin-bottom: 20px;
+}
+
+#logo a {
+    color: #222;
+    font-size: 4.8em;
+    font-family: "ClassicRound-Medium", Georgia, Times, Times New Roman, serif;
+    text-shadow: 2px 1px 0 #fff;
+}
+
+nav {
+    text-align: right;
+    padding-top: 18px;
+}
+
+nav li {
+    display: inline;
+    font-size: 1.8em;
+    margin-left: 20px;
+}
+
+nav a {
+    color: #000;
+    text-shadow: 2px 1px 0 #fff;
+}
