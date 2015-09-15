@@ -8,16 +8,14 @@
 	</div>
 </div>-->
 
-{{?it.images.length}}
-	<div class="image">
-		<img src="{{=it.images[0].uri}}" alt="{{=it.title}}" />
-	</div>
-{{?}}
-
 <div class="text">
-	<h2>{{=it.title}}</h2>
+	<h1><a href="/search/{{=it.artistName}}/1">{{=it.artistName}}</a> <em>{{=it.title}}</em></h1>
 
-	<h3>by {{=it.artistName}}</h3>
+	{{?it.images.length}}
+		<div class="image">
+			<img src="{{=it.images[0].uri}}" alt="{{=it.title}}" />
+		</div>
+	{{?}}
 
 	<div class="tracklist">
 		<ol>
