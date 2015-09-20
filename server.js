@@ -1,7 +1,7 @@
 var express = require('express'),
     api = require('./node/api');
     app = express(),
-    port = process.env.port || 3000;
+    port = process.env.PORT || 3000;
 
 app.use(express.static('www'));
 
