@@ -16,6 +16,7 @@
         "grunt-plato": "~0.2.1"
     },
     "scripts": {
-        "start": "grunt && node server"
+        "postinstall": "grunt",
+        "start": "node server"
     }
 }
