@@ -19,7 +19,6 @@
     "grunt-plato": "~0.2.1"
   },
   "scripts": {
-    "preinstall": "bundle install",
     "postinstall": "grunt",
     "start": "node server.js"
   }
