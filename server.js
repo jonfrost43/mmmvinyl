@@ -11,6 +11,10 @@ app.get('/signin', api.signin);
 app.get('/oauth/callback', api.oauthCallback);
 app.get('/signout', api.signout);
 
+app.get('/env', function(req, res){
+    res.send(app.settings.env);
+})
+
 app.get('*', function(req, res){
     res.sendFile('index.html', {
         root: __dirname + '/www/'
