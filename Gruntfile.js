@@ -40,6 +40,7 @@ module.exports = function(grunt){
 		requirejs: {
 			options: {
 				baseUrl: 'www/script',
+				webroot: 'script',
 				config: ['config.js'],
 				name: 'main',
 				require: 'lib/require',
