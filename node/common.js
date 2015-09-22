@@ -1,11 +1,11 @@
 module.exports = {
 
 	development: {
-		baseUrl: 'http://localhost'
+		baseUrl: 'http://localhost:3000'
 	},
 
 	production: {
-		baseUrl: 'https://mmmvinyl.herokuapp.com/'
+		baseUrl: 'https://mmmvinyl.herokuapp.com'
 	}
 
 };

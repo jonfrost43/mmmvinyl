@@ -2,10 +2,9 @@ var express = require('express'),
     app = express();
 
 global.env = app.settings.env;
+global.port = process.env.PORT || 3000;
 
 var api = require('./node/api');
-    port = process.env.PORT || 3000;
-
 
 app.use(express.static('www'));
 

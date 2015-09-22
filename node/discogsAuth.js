@@ -7,14 +7,13 @@ var oauthSession = {},
 	consumerKey = 'yXcHeGpsInupapEgdmBG',
 	consumerSecret = 'lKEQkcWxJpnfvUrivvYdrzExZfzNReZQ',
 	appBaseUrl = common[env].baseUrl,
-	port = process.env.port || 3000;
 	oa = new OAuth(
 		baseUrl + '/oauth/request_token',
 		baseUrl + '/oauth/access_token',
 		consumerKey,
 		consumerSecret,
 		'1.0',
-		appBaseUrl + ':' + port + '/oauth/callback',
+		appBaseUrl + '/oauth/callback',
 		'HMAC-SHA1'
 	);
 
