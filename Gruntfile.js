@@ -19,14 +19,6 @@ module.exports = function(grunt){
 		},
 
 		sass: {
-			dist: {
-				options: {
-					style: 'compressed'
-				},
-				files: {
-					'www/style/main.css': 'sass/main.scss'
-				}
-			},
 			dev: {
 				options: {
 					style: 'expanded'
@@ -34,16 +26,45 @@ module.exports = function(grunt){
 				files: {
 					'www/style/main.css': 'sass/main.scss'
 				}
+			},
+			prod: {
+				options: {
+					style: 'compressed'
+				},
+				files: {
+					'www/style/main.css': 'sass/main.scss'
+				}
+			},
+		},
+
+		requirejs: {
+			options: {
+				baseUrl: 'www/script',
+				config: ['config.js'],
+				name: 'main',
+				require: 'lib/require',
+				includeAlmond: false,
+				out: 'www/script/default.js'
+			},
+			dev: {
+				options: {
+					build: false
+				}
+			},
+			prod: {
+				options: {
+					build: true
+				}
 			}
-		}
+	    }
 	});
 
 	grunt.loadNpmTasks('grunt-plato');
 	grunt.loadNpmTasks('grunt-contrib-watch');
-	//grunt.loadNpmTasks('grunt-contrib-sass');
+	grunt.loadNpmTasks('grunt-require');
 	grunt.loadNpmTasks('grunt-sass');
 
-	grunt.registerTask('default', ['sass:dist']);
+	grunt.registerTask('default', ['sass:prod', 'requirejs:prod']);
 
 	grunt.registerTask('dev', ['sass:dev', 'watch']);
 
