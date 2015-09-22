@@ -1,10 +1,12 @@
-var OAuth = require('oauth').OAuth/*,
+var OAuth = require('oauth').OAuth,
+	common = require('./common')/*,
 	database = require('./database')*/;
 
 var oauthSession = {},
 	baseUrl = 'https://api.discogs.com',
 	consumerKey = 'yXcHeGpsInupapEgdmBG',
 	consumerSecret = 'lKEQkcWxJpnfvUrivvYdrzExZfzNReZQ',
+	appBaseUrl = common[env].baseUrl,
 	port = process.env.port || 3000;
 	oa = new OAuth(
 		baseUrl + '/oauth/request_token',
@@ -12,7 +14,7 @@ var oauthSession = {},
 		consumerKey,
 		consumerSecret,
 		'1.0',
-		'http://localhost:' + port + '/oauth/callback',
+		appBaseUrl + ':' + port + '/oauth/callback',
 		'HMAC-SHA1'
 	);
 
