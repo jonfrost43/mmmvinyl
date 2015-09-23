@@ -45,7 +45,7 @@ function(Backbone, doT, ReleasesCollection, CollectionTemplate){
 
 		goToLink: function(e){
 			e.preventDefault();
-			Backbone.history.navigate(e.target.pathname, {trigger: true});
+			Backbone.history.navigate(e.currentTarget.pathname, {trigger: true});
 		}
 	});
 });

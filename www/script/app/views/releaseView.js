@@ -61,7 +61,7 @@ function(Backbone, doT, discogs, ReleaseModel, ReleaseTemplate, PlaylistsCollect
 
 		goToLabel: function(e){
 			e.preventDefault();
-			Backbone.history.navigate(e.target.pathname, {trigger: true});
+			Backbone.history.navigate(e.currentTarget.pathname, {trigger: true});
 		},
 
 		togglePlaylistsDropdown: function(e){
