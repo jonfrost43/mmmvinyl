@@ -2,8 +2,8 @@
 {{~it.data[0].results :release}}
 	<li>
 		<a href="{{=release.uri}}">
-			{{?release.thumb}}<img src="{{=release.thumb}}" width="50" height="50" />{{?}}
-			{{=release.title}} [{{=release.catno}}]
+			<span class="image">{{?release.thumb}}<img src="{{=release.thumb}}" width="50" height="50" />{{?}}</span>
+			<span class="text">{{=release.title}} [{{=release.catno}}]</span>
 		</a>
 	</li>
 {{~}}

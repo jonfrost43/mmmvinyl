@@ -1,5 +1,15 @@
-<ul>
-{{~it.releases :release}}
-	<li><a href="{{=release.uri}}">{{=release.artist}} - {{=release.title}} - {{=release.format}}</a></li>
-{{~}}
-</ul>
+<div class="tracklist">
+	<ul>
+	{{~it.releases :release}}
+		<li>
+			<a href="{{=release.uri}}">
+				<span class="image">{{?release.thumb}}<img src="{{=release.thumb}}" width="50" height="50" />{{?}}</span>
+				<span class="text">
+					<span class="heading">{{=release.artist}}</span>
+					<span class="subHeading">{{=release.title}} - {{=release.format}} [{{=release.catno}}]</span>
+				</span>
+			</a>
+		</li>
+	{{~}}
+	</ul>
+</div>
