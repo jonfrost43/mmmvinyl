@@ -21,7 +21,8 @@ module.exports = function(grunt){
 		sass: {
 			dev: {
 				options: {
-					style: 'expanded'
+					style: 'expanded',
+					sourceMap: true
 				},
 				files: {
 					'www/style/main.css': 'sass/main.scss'
