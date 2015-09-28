@@ -2,8 +2,7 @@ var OAuth = require('oauth').OAuth,
 	common = require('./common')/*,
 	database = require('./database')*/;
 
-var oauthSession = {},
-	baseUrl = 'https://api.discogs.com',
+var baseUrl = 'https://api.discogs.com',
 	consumerKey = 'yXcHeGpsInupapEgdmBG',
 	consumerSecret = 'lKEQkcWxJpnfvUrivvYdrzExZfzNReZQ',
 	appBaseUrl = common[env].baseUrl,
@@ -23,37 +22,29 @@ exports.signin = function(args){
 			args.error();
 		}
 		else{
-			oauthSession.token = oauthToken;
-			oauthSession.tokenSecret = oauthTokenSecret;
-
-			args.success(oauthToken);
+			args.success(oauthToken, oauthTokenSecret);
 		}
 	});
 }
 
 exports.signout = function(args){
-	oauthSession = {};
+	//clear session
 }
 
 exports.signinCallback = function(args){
-	oa.getOAuthAccessToken(oauthSession.token, oauthSession.tokenSecret, args.oauthVerifier,
+	oa.getOAuthAccessToken(args.session.oauthToken, args.session.oauthTokenSecret, args.oauthVerifier,
 		function(error, oauthAccessToken, oauthAccessTokenSecret, results){
 			if(error){
-				oauthSession = {};
 				args.error();
 			}
 			else{
-				oauthSession.accessToken = oauthAccessToken;
-				oauthSession.accessTokenSecret = oauthAccessTokenSecret;
-
 				getIdentity({
 					oauthAccessToken: oauthAccessToken,
 					oauthAccessTokenSecret: oauthAccessTokenSecret,
 					success: function(data){
 						data = JSON.parse(data);
 
-						oauthSession.username = data.username;
-						oauthSession.discogsId = data.id;
+						args.success(oauthAccessToken, oauthAccessTokenSecret, data.username, data.id);
 
 /*						database.addUser({
 							username: data.username,
@@ -62,18 +53,15 @@ exports.signinCallback = function(args){
 */					}
 				});
 
-				args.success();
 			}
 		}
 	);
 }
 
 function getIdentity(args){
-	console.log(args);
 	oa.get(baseUrl + '/oauth/identity', args.oauthAccessToken, args.oauthAccessTokenSecret, function(error, data, response){
 		if(error){
 			if(typeof args.error === 'function'){
-				console.log(error);
 				args.error(error);
 			}
 		}
@@ -99,6 +87,5 @@ function getCollection(args){
 	});
 }
 
-exports.session = oauthSession;
 exports.getIdentity = getIdentity;
 exports.getCollection = getCollection;

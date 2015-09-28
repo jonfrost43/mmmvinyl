@@ -1,4 +1,6 @@
 var express = require('express'),
+    cookieParser = require('cookie-parser'),
+    expressSession = require('express-session'),
     app = express();
 
 global.env = app.settings.env;
@@ -7,6 +9,8 @@ global.port = process.env.PORT || 3000;
 var api = require('./node/api');
 
 app.use(express.static('www'));
+app.use(cookieParser());
+app.use(expressSession({secret: '1234567890QWERTY', resave: true, saveUninitialized: true}));
 
 app.get('/api/identity', api.identity);
 app.get('/api/collection', api.collection);

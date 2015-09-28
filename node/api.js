@@ -2,11 +2,11 @@ var discogsAuth = require('./discogsAuth');
 
 exports.identity = function(request, response){
 	console.log('Request handler "identity" was called.');
-	console.log(discogsAuth.session);
+	console.log(request.session);
 
 	discogsAuth.getIdentity({
-		oauthAccessToken: discogsAuth.session.accessToken,
-		oauthAccessTokenSecret: discogsAuth.session.accessTokenSecret,
+		oauthAccessToken: request.session.accessToken,
+		oauthAccessTokenSecret: request.session.accessTokenSecret,
 		error: function(error){
             response.status(error.statusCode || 500).send(error.data || 'Server error');
 		},
@@ -20,8 +20,12 @@ exports.signin = function(request, response){
 	console.log('Request handler "signin" was called.');
 
 	discogsAuth.signin({
-		success: function(oauthToken){
+		success: function(oauthToken, oauthTokenSecret){
 			console.log('Success on getOAuthRequestToken');
+
+			request.session.oauthToken = oauthToken;
+			request.session.oauthTokenSecret = oauthTokenSecret;
+
 			response.redirect(302, 'http://www.discogs.com/oauth/authorize?oauth_token='+oauthToken);
 		},
 		error: function(error){
@@ -37,8 +41,14 @@ exports.oauthCallback = function(request, response){
 	console.log(request.query);
 
 	discogsAuth.signinCallback({
+		session: request.session,
 		oauthVerifier: request.query.oauth_verifier,
-		success: function(){
+		success: function(accessToken, accessTokenSecret, username, userId){
+			request.session.accessToken = accessToken;
+			request.session.accessTokenSecret = accessTokenSecret;
+			request.session.username = username;
+			request.session.userId = userId;
+
 			response.redirect(302, '/');
 		},
 		error: function(error){
@@ -52,19 +62,18 @@ exports.oauthCallback = function(request, response){
 exports.signout = function(request, response){
 	console.log('Request handler "signout" was called.');
 	discogsAuth.signout();
-	discogsAuth.session = {};
-	console.log(discogsAuth.session);
+	console.log(request.session);
 	response.redirect(302, '/');
 }
 
 exports.collection = function(request, response){
 	console.log('Request handler "collection" was called.');
-	console.log(discogsAuth.session);
+	console.log(request.session);
 
 	discogsAuth.getCollection({
-		username: discogsAuth.session.username,
-		oauthAccessToken: discogsAuth.session.accessToken,
-		oauthAccessTokenSecret: discogsAuth.session.accessTokenSecret,
+		username: request.session.username,
+		oauthAccessToken: request.session.accessToken,
+		oauthAccessTokenSecret: request.session.accessTokenSecret,
 		error: function(error){
 			response.status(error.statusCode).json(error.data);
 		},
