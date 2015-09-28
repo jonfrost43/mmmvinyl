@@ -1,15 +1,20 @@
-<h2>My collection</h2>
+<h1>My collection</h1>
 <ul>
 {{~it.releases :release}}
 	{{var release_uri = "/" + release.basic_information.title.replace(/[\/\s]/g, "-") + "/release/" + release.id;}}
 
 	<li>
 		<a href="{{=release_uri}}">
-			{{?release.basic_information.thumb}}<img src="{{=release.basic_information.thumb}}" width="50" height="50" />{{?}}
-			{{~release.basic_information.artists :artist}}
-				{{=artist.name}} {{=artist.join}}
-			{{~}}
-			 - {{=release.basic_information.title}}
+			<span class="image">{{?release.basic_information.thumb}}<img src="{{=release.basic_information.thumb}}" width="50" height="50" />{{?}}</span>
+			<span class="text">
+				<span class="heading">
+					{{~release.basic_information.artists :artist}}
+						{{=artist.name}} {{=artist.join}}
+					{{~}}
+				</span>
+				<span class="subHeading">{{=release.basic_information.title}}</span>
+			</span>
+		</a>
 	</li>
 
 {{~}}
