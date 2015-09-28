@@ -11,7 +11,7 @@ function(Backbone, SearchResultsView, ReleaseView, LabelView, PlaylistView, Coll
 		routes: {
 			':title/release/:id': 'release',
 			':name/labels/:id(/:page)': 'label',
-			'search/:term/:page': 'search',
+			'search/:query/:page': 'search',
 			'playlist/:id': 'playlist',
 			'collection': 'collection',
 			'signup': 'signup',
@@ -36,11 +36,11 @@ function(Backbone, SearchResultsView, ReleaseView, LabelView, PlaylistView, Coll
 				page: page
 			});
 		},
-		search: function(term, page){
+		search: function(query, page){
 			console.log('search route');
 			$('#loadingMsg').show();
 			new SearchResultsView({
-				term: decodeURIComponent(term),
+				query: decodeURIComponent(query),
 				page: page
 			});
 		},

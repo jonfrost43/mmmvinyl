@@ -11,10 +11,14 @@ define(['backbone', 'app/models/release'], function(Backbone, ReleaseModel){
 		},
 
 		searchList: function(){
-			var urlParts = window.location.pathname.split("/"),
-				path = "/" + urlParts[1] + "/" + urlParts[2] + "/";
+			var urlParts = window.location.pathname.split('/'),
+				path = '/' + urlParts[1] + '/' + urlParts[2] + '/';
 
-			return {data: this.toJSON(), path: path};
+			return {
+				data: this.toJSON(),
+				path: path,
+				query: decodeURIComponent(urlParts[2])
+			};
 		},
 
 		labelList: function(){
