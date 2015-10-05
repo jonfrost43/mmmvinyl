@@ -1,12 +1,13 @@
 define([
 	'backbone',
+	'app/views/homeView',
 	'app/views/searchResultsView',
 	'app/views/releaseView',
 	'app/views/labelView',
 	'app/views/playlistView',
 	'app/views/collectionView'
 ],
-function(Backbone, SearchResultsView, ReleaseView, LabelView, PlaylistView, CollectionView){
+function(Backbone, HomeView, SearchResultsView, ReleaseView, LabelView, PlaylistView, CollectionView){
 	return Backbone.Router.extend({
 		routes: {
 			':title/release/:id': 'release',
@@ -19,7 +20,8 @@ function(Backbone, SearchResultsView, ReleaseView, LabelView, PlaylistView, Coll
 		},
 		defaultRoute: function(){
 			console.log('default route');
-			$('#main').empty();
+			$('#loadingMsg').show();
+			new HomeView();
 		},
 		release: function(title, id){
 			console.log('release route', id);

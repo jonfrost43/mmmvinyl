@@ -19,18 +19,23 @@ function(Backbone, doT, ReleasesCollection, CollectionTemplate){
 
 		initialize: function(){
 			console.log('collection view init');
-			this.getCollection();
+			this.getCollection().then(_.bind(this._onSuccess, this), _.bind(this._onError, this));
 		},
 
 		getCollection: function(){
-			$.ajax({
+			return $.ajax({
 				url: '/api/collection',
-				dataType: 'json',
-				success: _.bind(function(response){
-					this.collection = new ReleasesCollection(response);
-					this.render();
-				}, this)
+				dataType: 'json'
 			});
+		},
+
+		_onSuccess: function(response){
+			this.collection = new ReleasesCollection(response);
+			this.render();
+		},
+
+		_onError: function(response){
+			Backbone.history.navigate('/', {trigger: true});
 		},
 
 		render: function(){

@@ -70,6 +70,11 @@ exports.collection = function(request, response){
 	console.log('Request handler "collection" was called.');
 	console.log(request.session);
 
+	if(!request.session.username){
+		response.status(401).send('You must be authenticated to Discogs');
+		return;
+	}
+
 	discogsAuth.getCollection({
 		username: request.session.username,
 		oauthAccessToken: request.session.accessToken,
