@@ -1,0 +1,13 @@
+<h1>Playlists</h1>
+<div class="tracklist">
+	<ol>
+	{{~it :playlist :index}}
+		<li>
+			<a href="/playlist/{{=playlist.name}}">
+				<span class="heading">{{=playlist.name}}</span>
+				<span class="subHeading">{{=playlist.tracklist.length}} tracks</span>
+			</a>
+		</li>
+	{{~}}
+	</ol>
+</div>

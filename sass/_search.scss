@@ -19,23 +19,17 @@
             display: block;
 			overflow: hidden;
 
-			> span {
+			span {
 				display: block;
-				float: left;
 
 				&.text {
+					float: left;
 					width: calc(100% - 60px);
 
-					> span {
-						display: block;
-					}
-
-					.subHeading {
-						color: #666;
-					}
 				}
 
 				&.image {
+					float: left;
 					width: 50px;
 					padding-right: 10px;
 
@@ -44,6 +38,11 @@
 		            }
 				}
 			}
+			
+			.subHeading {
+				color: #666;
+			}
+
         }
     }
 }

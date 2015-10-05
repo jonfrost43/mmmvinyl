@@ -4,15 +4,17 @@ define([
 	'app/views/searchResultsView',
 	'app/views/releaseView',
 	'app/views/labelView',
+	'app/views/playlistsView',
 	'app/views/playlistView',
 	'app/views/collectionView'
 ],
-function(Backbone, HomeView, SearchResultsView, ReleaseView, LabelView, PlaylistView, CollectionView){
+function(Backbone, HomeView, SearchResultsView, ReleaseView, LabelView, PlaylistsView, PlaylistView, CollectionView){
 	return Backbone.Router.extend({
 		routes: {
 			':title/release/:id': 'release',
 			':name/labels/:id(/:page)': 'label',
 			'search/:query/:page': 'search',
+			'playlists': 'playlists',
 			'playlist/:id': 'playlist',
 			'collection': 'collection',
 			'signup': 'signup',
@@ -45,6 +47,11 @@ function(Backbone, HomeView, SearchResultsView, ReleaseView, LabelView, Playlist
 				query: decodeURIComponent(query),
 				page: page
 			});
+		},
+		playlists: function(id){
+			console.log('playlists route');
+			$('#loadingMsg').show();
+			new PlaylistsView();
 		},
 		playlist: function(id){
 			console.log('playlist route');

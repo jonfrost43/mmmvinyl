@@ -4,7 +4,7 @@ define([
 	'app/collections/releases',
 	'text!templates/collection.html'
 ],
-function(Backbone, doT, ReleasesCollection, CollectionTemplate){
+function(Backbone, doT, ReleasesCollection, templateStr){
 
 	return Backbone.View.extend({
 		tagName: 'div',
@@ -40,7 +40,7 @@ function(Backbone, doT, ReleasesCollection, CollectionTemplate){
 
 		render: function(){
 			console.log(this.collection.toJSON()[0]);
-			var templateFnc = doT.template(CollectionTemplate),
+			var templateFnc = doT.template(templateStr),
 				html = templateFnc(this.collection.toJSON()[0]);
 
 			this.$el.append(html);
