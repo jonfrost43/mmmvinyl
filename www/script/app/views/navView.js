@@ -4,11 +4,15 @@ define([
 	'text!templates/nav.html',
 ],
 function(Backbone, doT, NavTemplate){
+
 	return Backbone.View.extend({
+
 		tagName: 'ul',
+
 		events: {
 			'click a.internal': 'goToLink'
 		},
+
 		initialize: function(){
 			$.ajax({
 				url: '/api/identity',
@@ -18,16 +22,15 @@ function(Backbone, doT, NavTemplate){
 				}, this)
 			});
 		},
+
 		render: function(userData){
 			var templateFnc = doT.template(NavTemplate),
 				html = templateFnc(userData);
 
 			this.$el.append(html);
 			$('nav').html(this.$el);
-		},
-		goToLink: function(e){
-			e.preventDefault();
-			Backbone.history.navigate(e.target.pathname, {trigger: true});
 		}
+		
 	});
+
 });
