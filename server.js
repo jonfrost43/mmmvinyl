@@ -1,6 +1,7 @@
 var express = require('express'),
     cookieParser = require('cookie-parser'),
     expressSession = require('express-session'),
+    MongoStore = require('connect-mongo')(expressSession),
     app = express();
 
 global.env = app.settings.env;
@@ -10,7 +11,14 @@ var api = require('./node/api');
 
 app.use(express.static('www'));
 app.use(cookieParser());
-app.use(expressSession({secret: '1234567890QWERTY', resave: true, saveUninitialized: true}));
+app.use(expressSession({
+    secret: '1234567890QWERTY',
+    resave: true,
+    saveUninitialized: true,
+    store: new MongoStore({
+        url: 'mongodb://localhost/mmmvinyl'
+    })
+}));
 
 app.get('/api/identity', api.identity);
 app.get('/api/collection', api.collection);
