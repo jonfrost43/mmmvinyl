@@ -2,6 +2,7 @@ var express = require('express'),
     cookieParser = require('cookie-parser'),
     expressSession = require('express-session'),
     MongoStore = require('connect-mongo')(expressSession),
+    common = require('./node/common'),
     app = express();
 
 global.env = app.settings.env;
@@ -16,7 +17,7 @@ app.use(expressSession({
     resave: true,
     saveUninitialized: true,
     store: new MongoStore({
-        url: 'mongodb://localhost/mmmvinyl'
+        url: common[env].mongoConnectionString
     })
 }));
 
@@ -27,7 +28,7 @@ app.get('/oauth/callback', api.oauthCallback);
 app.get('/signout', api.signout);
 
 app.get('/env', function(req, res){
-    res.send(app.settings.env);
+    res.send('app.settings.env='+app.settings.env+', process.env.NODE_ENV='+process.env.NODE_ENV);
 })
 
 app.get('/port', function(req, res){
