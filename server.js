@@ -1,8 +1,8 @@
-var express = require('express'),
+var env = require('./node/env'),
+    express = require('express'),
     cookieParser = require('cookie-parser'),
     expressSession = require('express-session'),
     MongoStore = require('connect-mongo')(expressSession),
-    common = require('./node/common'),
     app = express();
 
 global.env = app.settings.env;
@@ -17,7 +17,7 @@ app.use(expressSession({
     resave: true,
     saveUninitialized: true,
     store: new MongoStore({
-        url: common[env].mongoConnectionString
+        url: env.mongoConnectionString
     })
 }));
 

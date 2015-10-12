@@ -1,11 +1,11 @@
 var OAuth = require('oauth').OAuth,
-	common = require('./common')/*,
+	env = require('./env')/*,
 	database = require('./database')*/;
 
 var baseUrl = 'https://api.discogs.com',
 	consumerKey = 'yXcHeGpsInupapEgdmBG',
 	consumerSecret = 'lKEQkcWxJpnfvUrivvYdrzExZfzNReZQ',
-	appBaseUrl = common[env].baseUrl,
+	appBaseUrl = env.host,
 	oa = new OAuth(
 		baseUrl + '/oauth/request_token',
 		baseUrl + '/oauth/access_token',
