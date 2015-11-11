@@ -14,21 +14,29 @@
         padding: 0 0 0 20px;
     }
 
-    #logo, nav {
-        text-align: center;
+    #logo {
+        padding-left: 60px;
+        a {
+            font-size: 3.6em;
+        }
     }
+
     .header {
         padding-bottom: 0;
     }
 
     nav {
+        text-align: left;
+
         button {
             display: inline;
             font-size: 2.5em;
             font-weight: bold;
             color: #333;
-            padding-right: 20px; //padding-bottom as its rotated 90deg
             transform: rotate(90deg);
+            position: absolute;
+            top: 25px;
+            left: 20px;
         }
         ul {
             display: none;
