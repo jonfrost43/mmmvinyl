@@ -18,10 +18,6 @@ function(Backbone, doT, discogs, ReleasesCollection, SearchResultsTemplate){
 			id: 'searchResults'
 		},
 
-		events: {
-			'click a': 'goToLink'
-		},
-
 		initialize: function(){
 			console.log('search results view init');
 			this.getResults(this.options.query, this.options.page);
@@ -53,11 +49,6 @@ function(Backbone, doT, discogs, ReleasesCollection, SearchResultsTemplate){
 			this.$el.append(html);
 			$('#main').html(this.$el);
 			$('#loadingMsg').hide();
-		},
-
-		goToLink: function(e){
-			e.preventDefault();
-			Backbone.history.navigate(e.currentTarget.pathname, {trigger: true});
 		}
 	});
 });

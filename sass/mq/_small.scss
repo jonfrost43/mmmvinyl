@@ -17,10 +17,29 @@
     #logo, nav {
         text-align: center;
     }
+    .header {
+        padding-bottom: 0;
+    }
 
-    nav li {
-        margin-left: 10px;
-        margin-right: 10px;
+    nav {
+        button {
+            display: inline;
+            font-size: 2.5em;
+            font-weight: bold;
+            color: #333;
+            padding-right: 20px; //padding-bottom as its rotated 90deg
+            transform: rotate(90deg);
+        }
+        ul {
+            display: none;
+            margin: 0;
+        }
+        li {
+            display: block;
+            margin-left: 10px;
+            margin-right: 10px;
+            padding-bottom: 10px;
+        }
     }
 
     #main {

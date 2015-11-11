@@ -13,10 +13,6 @@ function(Backbone, doT, ReleasesCollection, templateStr){
 			id: 'collection'
 		},
 
-		events: {
-			'click a': 'goToLink'
-		},
-
 		initialize: function(){
 			console.log('collection view init');
 			this.getCollection().then(_.bind(this._onSuccess, this), _.bind(this._onError, this));
@@ -46,11 +42,6 @@ function(Backbone, doT, ReleasesCollection, templateStr){
 			this.$el.append(html);
 			$('#main').html(this.$el);
 			$('#loadingMsg').hide();
-		},
-
-		goToLink: function(e){
-			e.preventDefault();
-			Backbone.history.navigate(e.currentTarget.pathname, {trigger: true});
 		}
 	});
 });

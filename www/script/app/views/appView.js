@@ -5,13 +5,17 @@ define(['backbone'], function(Backbone){
 		el: document.getElementById('app'),
 
 		events: {
-			'click a.internal': 'goToLink',
+			'click a': 'goToLink',
 			'submit #search': 'search'
 		},
 
 		goToLink: function(e){
+			if(e.currentTarget.classList.contains('external')){
+				return;
+			}
+
 			e.preventDefault();
-			Backbone.history.navigate(e.target.pathname, {trigger: true});
+			Backbone.history.navigate(e.currentTarget.pathname, {trigger: true});
 		},
 
 		search: function(e){

@@ -7,13 +7,18 @@ function(Backbone, doT, NavTemplate){
 
 	return Backbone.View.extend({
 
-		tagName: 'ul',
+		el: document.getElementsByTagName('nav')[0],
+
+		isOpen: false,
 
 		events: {
-			'click a.internal': 'goToLink'
+			'click button': 'toggleMenu',
+			'click a': 'closeMenu'
 		},
 
 		initialize: function(){
+			this.$navList = this.$('ul');
+
 			$.ajax({
 				url: '/api/identity',
 				dataType: 'json',
@@ -27,10 +32,27 @@ function(Backbone, doT, NavTemplate){
 			var templateFnc = doT.template(NavTemplate),
 				html = templateFnc(userData);
 
-			this.$el.append(html);
-			$('nav').html(this.$el);
+			this.$navList.empty().append(html);
+		},
+
+		toggleMenu: function(){
+			this.isOpen ? this.closeMenu() : this.openMenu();
+		},
+
+		openMenu: function(){
+			this.$navList.slideDown(250);
+			this.isOpen = true;
+		},
+
+		closeMenu: function(e){
+			if(e && e.currentTarget.classList.contains('external')){
+				return;
+			}
+
+			this.$navList.slideUp(250);
+			this.isOpen = false;
 		}
-		
+
 	});
 
 });
