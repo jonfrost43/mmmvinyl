@@ -40,7 +40,8 @@ function(Backbone, doT, NavTemplate){
 		},
 
 		openMenu: function(){
-			this.$navList.slideDown(250);
+			$('#app').addClass('nav-open');
+			//this.$navList.slideDown(250);
 			this.isOpen = true;
 		},
 
@@ -48,8 +49,9 @@ function(Backbone, doT, NavTemplate){
 			if(e && e.currentTarget.classList.contains('external')){
 				return;
 			}
+			$('#app').removeClass('nav-open');
 
-			this.$navList.slideUp(250);
+			//this.$navList.slideUp(250);
 			this.isOpen = false;
 		}
 
