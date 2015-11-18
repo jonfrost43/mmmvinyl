@@ -73,7 +73,7 @@ function getIdentity(args){
 	});
 }
 function getCollection(args){
-	oa.get(baseUrl + '/users/' + args.username + '/collection/folders/0/releases', args.oauthAccessToken, args.oauthAccessTokenSecret, function(error, data, response){
+	oa.get(baseUrl + '/users/' + args.username + '/collection/folders/0/releases?sort=added&sort_order=desc', args.oauthAccessToken, args.oauthAccessTokenSecret, function(error, data, response){
 		if(error){
 			if(typeof args.error === 'function'){
 				args.error(error);
